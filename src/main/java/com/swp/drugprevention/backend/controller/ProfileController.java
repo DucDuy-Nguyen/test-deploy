@@ -99,7 +99,7 @@ public class ProfileController {
                 .body(profileResponse);
     }
     @GetMapping("/profileAllUser")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<ProfileResponse>> getAllUserProfile() {
         List<ProfileResponse> allProfiles = profileService.getAllUserProfile();
         return ResponseEntity.ok(allProfiles);

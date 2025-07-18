@@ -202,19 +202,19 @@ public class AppointmentService {
         );
     }
 
-    @Scheduled(fixedRate = 30000) // Chạy mỗi 30 giây
-    public void autoUpdateCancelledAppointments() {
-        LocalDateTime currentDateTime = LocalDateTime.now(); // Sử dụng LocalDateTime thay vì LocalTime
-        List<Appointment> activeAppointments = appointmentRepository.findByStatusNot(ConsultationStatus.Cancel);
-
-        for (Appointment appointment : activeAppointments) {
-            LocalDateTime appointmentEndDateTime = LocalDateTime.of(appointment.getDate(), appointment.getEndTime());
-            if (currentDateTime.isAfter(appointmentEndDateTime)) {
-                appointment.setStatus(ConsultationStatus.Cancel);
-                appointmentRepository.save(appointment);
-            }
-        }
-    }
+//    @Scheduled(fixedRate = 30000) // Chạy mỗi 30 giây
+//    public void autoUpdateCancelledAppointments() {
+//        LocalDateTime currentDateTime = LocalDateTime.now(); // Sử dụng LocalDateTime thay vì LocalTime
+//        List<Appointment> activeAppointments = appointmentRepository.findByStatusNot(ConsultationStatus.Cancel);
+//
+//        for (Appointment appointment : activeAppointments) {
+//            LocalDateTime appointmentEndDateTime = LocalDateTime.of(appointment.getDate(), appointment.getEndTime());
+//            if (currentDateTime.isAfter(appointmentEndDateTime)) {
+//                appointment.setStatus(ConsultationStatus.Cancel);
+//                appointmentRepository.save(appointment);
+//            }
+//        }
+//    }
 
     public List<AppointmentResponse> getAppointmentsByConsultant(Integer consultantId) {
         Consultant consultant = consultantRepository.findById(consultantId)
